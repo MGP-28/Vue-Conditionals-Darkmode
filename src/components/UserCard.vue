@@ -4,7 +4,7 @@
             v-if="!this.photo" />
         <div class="cardContainer"
             v-if="this.photo" >
-            <img :src="getPhoto" />
+            <img :src="getPhoto" :class="isFemaleCSSClass"/>
             <ul>
                 <li>
                     <h3>Name</h3>
@@ -36,7 +36,8 @@
                 name: "",
                 email: "",
                 age: "",
-                country: ""
+                country: "",
+                isFemale: false
             }
         },
         methods: {
@@ -50,39 +51,43 @@
                     this.email = user.email
                     this.age = user.dob.age
                     this.country = user.location.country
+                    this.isFemale = (user.gender == 'female') ? true : false
                 })
             }
         },
         computed: {
             getPhoto(){
                 return this.photo
+            },
+            isFemaleCSSClass(){
+                return (this.isFemale) ? "female" : ""
             }
         },
         beforeCreate(){
-            console.log('lifecycle hook: beforeCreated')
+
         },
         created(){
-            console.log('lifecycle hook: created')
+
         },
         beforeMount(){
-            console.log('lifecycle hook: beforeMount')
+
         },
         mounted(){
-            console.log('lifecycle hook: mounted')
+
             this.getUser()
 
         },
         beforeUpdate(){
-            console.log('lifecycle hook: beforeUpdate')
+
         },
         updated(){
-            console.log('lifecycle hook: updated')
+
         },
         beforeUnmount(){
-            console.log('lifecycle hook: beforeUnmount')
+
         },
         unmounted(){
-            console.log('lifecycle hook: unmounted')
+
         }
     }
 </script>
@@ -104,13 +109,21 @@
         padding-top: 50px;
         padding-bottom: 50px;
     }
+    @keyframes pulsing{
+        from{ box-shadow: var(--textcolor) 0 0 10px 1px; }
+        to{ box-shadow: var(--textcolor) 0 0 15px 5px; }
+    }
     img{
         height: 150px;
         width: 150px;
         border: 0.5px solid var(--titlecolor);
         border-radius: 50%;
         margin-bottom: 10px;
-        box-shadow: var(--backgroundcolor) 0 0 15px 1px;
+        animation: pulsing alternate-reverse infinite 1.2s linear;
+    }
+    img.female{
+        box-shadow: var(--secondarycolor) 0 0 20px 2px;
+        animation: none;
     }
     ul{
         padding: 0;

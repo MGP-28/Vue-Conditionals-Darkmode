@@ -10,6 +10,7 @@
   --textcolor: #ffffff;
   --titlecolor: blanchedalmond;
   --backgroundcolor: #242424;
+  --secondarycolor: #e9b713;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,6 +28,7 @@
   --textcolor: #000000;
   --titlecolor: purple;
   --backgroundcolor: #ffffff;
+  --secondarycolor: purple;
 
   transition-duration: 1s;
   transition-property: var(--textcolor), var(--titlecolor), var(--backgroundcolor);
@@ -78,4 +80,5 @@ input{
   border: 2px var(--textcolor) solid;
   box-shadow: var(--titlecolor) 0 0 6px 2px;
   padding: 10px 50px;
+  border-radius: 10px;
 }
