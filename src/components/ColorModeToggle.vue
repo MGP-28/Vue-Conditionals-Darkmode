@@ -13,26 +13,44 @@ export default {
     name: "UserCard",
         data(){
             return{
-                isDark: true,
+                isDark: this.getThemeFromLS()
             }
         },
         methods: {
-            toggleDark: function (){
-                document.documentElement.className = (document.documentElement.classList.contains('lightmode')) ? "" : "lightmode"
+            getThemeFromLS: function(){
+                const savedTheme = localStorage.getItem('darkmode')
+                if(savedTheme === null || savedTheme === undefined) return true
+                return (savedTheme == 'true') ? true : false
+            },
+            toggleDark: async function (){
+                console.log('Toggling', this.isDark)
+                const classToAddToRoot = await (this.isDark) ? "" : "lightmode"
+                console.log("root class", classToAddToRoot)
+                document.documentElement.className = await classToAddToRoot
+            },
+            setThemeOsLS: function(){
+                localStorage.setItem('darkmode', this.isDark);
+            }
+        },
+        watch:{
+            isDark(){
+                this.toggleDark()
+                this.setThemeOsLS()
             }
         },
         computed: {
             isDarkClass(){
-                return this.isDark ? "toggled" : null
+                return (this.isDark) ? "toggled" : null
             }
         },
         beforeCreate(){},
         created(){},
         beforeMount(){},
-        mounted(){},
-        beforeUpdate(){
+        mounted(){
             this.toggleDark()
+            this.setThemeOsLS()
         },
+        beforeUpdate(){},
         updated(){},
         beforeUnmount(){},
         unmounted(){}
