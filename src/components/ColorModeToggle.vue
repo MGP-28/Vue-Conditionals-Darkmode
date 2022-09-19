@@ -23,10 +23,7 @@ export default {
                 return (savedTheme == 'true') ? true : false
             },
             toggleDark: async function (){
-                console.log('Toggling', this.isDark)
-                const classToAddToRoot = await (this.isDark) ? "" : "lightmode"
-                console.log("root class", classToAddToRoot)
-                document.documentElement.className = await classToAddToRoot
+                document.documentElement.classList.toggle("lightmode")
             },
             setThemeOsLS: function(){
                 localStorage.setItem('darkmode', this.isDark);
